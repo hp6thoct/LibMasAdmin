@@ -23,3 +23,7 @@ export function addBook(data){
 export function updateBook(bookid, data){
     return axios.put(`http://localhost:8080/api/book/add/${bookid}`,data)
 }
+
+export function deleteBook(bookid){
+    return axios.delete(`http://localhost:8080/api/book/delete/${bookid}`)
+}

@@ -2,7 +2,7 @@ import "antd/dist/reset.css";
 import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Typography } from "antd";
 import Product from "../Components/Product";
-import { getBookList } from "../Api/BookController";
+import { deleteBook, getBookList } from "../Api/BookController";
 import AddBookModal from "../Components/AddBookModal";
 
 const { Title } = Typography;
@@ -29,21 +29,26 @@ const BookManagement = () => {
   };
 
   const handleEdit = (index) => {
-    console.log(books[index])
+    console.log(books[index]);
     setEdittingBook(books[index]);
     setEditBook(true);
     setAddNewBook(false);
   };
 
-  const handleDelete = (index) => {
-    // Implement delete logic here
+  const handleDelete = async (index) => {
+    const res = await deleteBook(books[index].id);
+    fetchBook();
     console.log(`Delete book with ID: ${books[index].id}`);
   };
 
   return (
     <div style={{ padding: "24px" }}>
       <Title level={2}>Book Management</Title>
-      <Button type="primary" style={{ marginBottom: "16px" }} onClick={handleAddBook}>
+      <Button
+        type="primary"
+        style={{ marginBottom: "16px" }}
+        onClick={handleAddBook}
+      >
         Create New Book
       </Button>
       <AddBookModal
